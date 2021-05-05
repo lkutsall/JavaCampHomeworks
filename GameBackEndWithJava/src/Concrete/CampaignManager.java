@@ -1,17 +1,17 @@
 package Concrete;
 
 import Abstract.CampaignService;
+import Abstract.MernisService;
 import Abstract.Player;
-import Abstract.PlayerValidation;
 import Utils.NationChecker;
 
 public class CampaignManager implements CampaignService {
 
-	private PlayerValidation playerValidation;
+	private MernisService mernisService;
 	
-	public CampaignManager(PlayerValidation playerValidation) {
+	public CampaignManager(MernisService mernisService) {
 		super();
-		this.playerValidation = playerValidation;
+		this.mernisService = mernisService;
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class CampaignManager implements CampaignService {
 	@Override
 	public void applyCampaign(Campaign campaign, Player player, Product product) {
 		
-		if (NationChecker.checkIfTurkish(player) && playerValidation.checkIfThePlayerValid(player) ) {
+		if (NationChecker.checkIfTurkish(player) && mernisService.checkIfThePlayerValid(player) ) {
 			System.out.println(player.getFirstName() + "; the campaign applied to your product successfully. Now the " + product.getProductName() + "'s price is just " + ((product.price*campaign.discountrate)/100) + " $ only for you.");
 		}else {
 			System.out.println("Sorry " + player.getFirstName() + ", this campaign is valid for only Turkish citizens. If you are Turkish citizen, this means the information you gave is invalid. If you are not Turkish citizen, please try the other campaigns that works for your country.");

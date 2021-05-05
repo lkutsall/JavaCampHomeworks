@@ -1,6 +1,6 @@
 import java.util.GregorianCalendar;
 
-import Adapters.MernisValidator;
+import Adapters.MernisServiceAdapter;
 import Concrete.Campaign;
 import Concrete.CampaignManager;
 import Concrete.ForeignPlayer;
@@ -8,18 +8,19 @@ import Concrete.PlayerManager;
 import Concrete.Product;
 import Concrete.ProductManager;
 import Concrete.TurkishPlayer;
+import tr.gov.nvi.tckimlik.WS.KPSPublicSoapProxy;
 
 public class Main {
 
 	public static void main(String[] args) {
 
-		PlayerManager playerManager = new PlayerManager(new MernisValidator());
+		PlayerManager playerManager = new PlayerManager(new MernisServiceAdapter(new KPSPublicSoapProxy()));
 		ProductManager productManager = new ProductManager();
-		CampaignManager campaignManager = new CampaignManager(new MernisValidator());
+		CampaignManager campaignManager = new CampaignManager(new MernisServiceAdapter(new KPSPublicSoapProxy()));
 		TurkishPlayer player1 = new TurkishPlayer();
 		player1.setId(1);
-		player1.setFirstName("Mehmet");
-		player1.setLastName("Ağa");
+		player1.setFirstName("Jane");
+		player1.setLastName("Doe");
 		player1.setDateOfBirth(new GregorianCalendar(1900, 12, 30).getTime());
 		player1.setNationalId("00000000000");
 		

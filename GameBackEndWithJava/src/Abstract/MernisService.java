@@ -1,6 +1,6 @@
 package Abstract;
 
-public interface PlayerValidation {
+public interface MernisService {
 
 	boolean checkIfThePlayerValid(Player turkishPlayer);
 }
