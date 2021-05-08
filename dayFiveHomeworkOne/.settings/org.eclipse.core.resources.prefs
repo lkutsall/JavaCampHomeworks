@@ -1,0 +1,4 @@
+eclipse.preferences.version=1
+encoding//src/dayFiveHomeworkOne/Main.java=UTF-8
+encoding//src/dayFiveHomeworkOne/business/concretes/UserManager.java=UTF-8
+encoding//src/dayFiveHomeworkOne/dataAccess/concretes/inMemoryDatabase/inMemoryUserDao.java=UTF-8
