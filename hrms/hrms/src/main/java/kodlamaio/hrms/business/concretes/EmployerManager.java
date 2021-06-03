@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kodlamaio.hrms.business.abstracts.EmailService;
 import kodlamaio.hrms.business.abstracts.EmployerService;
 import kodlamaio.hrms.core.utilities.business.BusinessRules;
 import kodlamaio.hrms.core.utilities.results.DataResult;
@@ -20,11 +21,13 @@ import kodlamaio.hrms.entities.dtos.RegisterModelForEmployerDto;
 public class EmployerManager implements EmployerService{
 
 	private EmployerDao employerDao;
+	private EmailService emailService;
 	
 	@Autowired
-	public EmployerManager(EmployerDao employerDao) {
+	public EmployerManager(EmployerDao employerDao, EmailService emailService) {
 		super();
 		this.employerDao = employerDao;
+		this.emailService = emailService;
 	}
 
 	@Override
@@ -42,7 +45,8 @@ public class EmployerManager implements EmployerService{
 		}
 		
 		Employer employerToRegister = employerDao.save(employer);
-		return new SuccessResult(employerToRegister.getCompanyName() + " registered to database successfully.");
+		emailService.sendEmail(employer.getEmail());
+		return new SuccessResult(employerToRegister.getCompanyName() + " registered to database successfully." + emailService.sendEmail(employer.getEmail()).getMessage());
 	}
 	
 	public DataResult<List<Employer>> getAll(){

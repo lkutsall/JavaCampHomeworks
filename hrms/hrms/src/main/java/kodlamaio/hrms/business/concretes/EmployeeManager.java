@@ -13,7 +13,6 @@ import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
-import kodlamaio.hrms.core.utilities.validations.abstracts.CredentialsCheckService;
 import kodlamaio.hrms.dataAccess.abstracts.EmployeeDao;
 import kodlamaio.hrms.entities.concretes.Employee;
 import kodlamaio.hrms.entities.dtos.RegisterModelForEmployeeDto;
@@ -22,42 +21,33 @@ import kodlamaio.hrms.entities.dtos.RegisterModelForEmployeeDto;
 public class EmployeeManager implements EmployeeService {
 
 	private EmployeeDao employeeDao;
-	private CredentialsCheckService credentialsCheckService;
 	private EmailService emailService;
 
 	@Autowired
-	public EmployeeManager(EmployeeDao employeeDao, CredentialsCheckService credentialsCheckService, EmailService emailService) {
+	public EmployeeManager(EmployeeDao employeeDao, EmailService emailService) {
 		super();
 		this.employeeDao = employeeDao;
-		this.credentialsCheckService = credentialsCheckService;
 		this.emailService = emailService;
 	}
-	
+
 	@Override
 	public Result register(RegisterModelForEmployeeDto registerModelForEmployeeDto) {
 
 		Employee employee = DtoToEntityMapManager.employeeMapper(registerModelForEmployeeDto);
-		
-		Result result = BusinessRules.run(
-				checkIfEmailExists(employee.getEmail()),
-				checkIfNationalIdIsExist(employee.getNationalId()), 
-				checkIfPasswordEqualsRepeatPassword(registerModelForEmployeeDto)
-				);
-		
-		if (credentialsCheckService.checkIfInformationIsNull(employee).isSuccess()) {
-			if (result != null) {
-				return result;
-			}
 
-			employeeDao.save(employee);
-			emailService.sendEmail(employee.getEmail());
-			return new SuccessResult(employee.getFirstName() + ", registered successfully.");
-		}else {
-			return credentialsCheckService.checkIfInformationIsNull(employee);
+		Result result = BusinessRules.run(checkIfEmailExists(employee.getEmail()),
+				checkIfNationalIdIsExist(employee.getNationalId()),
+				checkIfPasswordEqualsRepeatPassword(registerModelForEmployeeDto));
+		if (result != null) {
+			return result;
 		}
 
+		employeeDao.save(employee);
+		emailService.sendEmail(employee.getEmail());
+		return new SuccessResult(employee.getFirstName() + ", registered successfully. "
+				+ emailService.sendEmail(employee.getEmail()).getMessage());
 	}
-	
+
 	@Override
 	public DataResult<List<Employee>> getAllByIsActive() {
 		List<Employee> employees = employeeDao.getAllByIsActive();
@@ -85,7 +75,7 @@ public class EmployeeManager implements EmployeeService {
 	private Result checkIfPasswordEqualsRepeatPassword(RegisterModelForEmployeeDto registerModelForEmployeeDto) {
 		if (registerModelForEmployeeDto.getPassword().equals(registerModelForEmployeeDto.getPasswordRepeat())) {
 			return new SuccessResult();
-		}else {
+		} else {
 			return new ErrorResult("The passwords are not equal.");
 		}
 	}

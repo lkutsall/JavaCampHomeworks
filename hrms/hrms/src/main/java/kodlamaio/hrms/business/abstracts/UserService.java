@@ -4,5 +4,5 @@ import kodlamaio.hrms.core.utilities.results.Result;
 
 public interface UserService {
 
-	Result register();
+	Result activate(String email);
 }
