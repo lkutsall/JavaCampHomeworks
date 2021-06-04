@@ -2,7 +2,6 @@ package kodlamaio.hrms.entities.dtos;
 
 import java.util.Date;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 import com.sun.istack.NotNull;
@@ -12,35 +11,38 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class RegisterModelForEmployeeDto {
+@AllArgsConstructor
+public class AddModelForJobAdvertisementDto {
 
-	@NotNull
 	@NotBlank
-	private String firstName;
+	@NotNull
+	private String jobTitle;
+	
+	@NotBlank
+	@NotNull
+	private String cityName;
+	
+	@NotBlank
+	@NotNull
+	private String employerName;
+	
+	@NotBlank
+	@NotNull
+	private String jobDescription;
+	
+	@NotBlank
+	@NotNull
+	private String numberOfPositions;
+	
+	@NotBlank
+	@NotNull
+	private double salaryRangeMin;
+	
+	@NotBlank
+	@NotNull
+	private double salaryRangeMax;
 	
 	@NotNull
-	@NotBlank
-	private String lastName;
-	
-	@NotNull
-	@NotBlank
-	@Email
-	private String email;
-	
-	@NotNull
-	@NotBlank
-	private String password;
-	
-	@NotNull
-	@NotBlank
-	private String passwordRepeat;
-	
-	@NotNull
-	@NotBlank
-	private String nationalId;
-	
-	@NotNull
-	private Date dateOfBirth;
+	private Date expirationtionDate;
 }
