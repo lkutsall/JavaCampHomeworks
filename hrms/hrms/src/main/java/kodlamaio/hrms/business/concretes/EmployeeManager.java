@@ -53,6 +53,12 @@ public class EmployeeManager implements EmployeeService {
 		List<Employee> employees = employeeDao.getAllByIsActive();
 		return new SuccessDataResult<List<Employee>>(employees, "All employees listed.");
 	}
+	
+	@Override
+	public DataResult<Employee> getById(int id) {
+		Employee employeeToGet = employeeDao.getById(id);
+		return new SuccessDataResult<Employee>(employeeToGet ," Employee listed successfully.");
+	}
 
 	private Result checkIfEmailExists(String email) {
 		Employee employee = employeeDao.getByEmail(email);

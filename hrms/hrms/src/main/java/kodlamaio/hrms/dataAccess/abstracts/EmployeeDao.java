@@ -13,4 +13,5 @@ public interface EmployeeDao extends JpaRepository<Employee, Integer> {
 	Employee getByNationalId(String nationalId);
 	@Query("From Employee where isActive= true")
 	List<Employee> getAllByIsActive();
+	Employee getById(int id);
 }

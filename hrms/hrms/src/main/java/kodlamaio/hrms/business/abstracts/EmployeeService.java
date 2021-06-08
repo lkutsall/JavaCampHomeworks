@@ -11,4 +11,5 @@ public interface EmployeeService {
 
 	Result register(RegisterModelForEmployeeDto registerModelForEmployeeDto);
 	DataResult<List<Employee>> getAllByIsActive();
+	DataResult<Employee> getById(int id);
 }

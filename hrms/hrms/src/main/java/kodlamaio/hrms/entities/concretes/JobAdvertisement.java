@@ -32,26 +32,6 @@ public class JobAdvertisement {
 	@NotEmpty
 	@Column(name = "id")
 	private int id;
-
-	/*
-	 * @NotBlank
-	 * 
-	 * @NotNull
-	 * 
-	 * @Column(name = "job_id") private int jobId;
-	 * 
-	 * @NotBlank
-	 * 
-	 * @NotNull
-	 * 
-	 * @Column(name = "employer_id") private int employerId;
-	 * 
-	 * @NotBlank
-	 * 
-	 * @NotNull
-	 * 
-	 * @Column(name = "city_id") private int cityId;
-	 */
 	
 	@NotBlank
 	@NotNull
