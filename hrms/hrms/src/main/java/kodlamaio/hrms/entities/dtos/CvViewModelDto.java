@@ -33,7 +33,7 @@ public class CvViewModelDto {
 	 * private List<Skill> skills; private List<Language> languages; private
 	 * List<Link> links; private CoverLetter coverLetter;
 	 */
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "employee")
 	private List<Education> educations;
@@ -48,22 +48,18 @@ public class CvViewModelDto {
 	private List<Experience> experiences;
 
 	@JsonIgnore
-
 	@OneToOne(mappedBy = "employee")
 	private Image image;
 
 	@JsonIgnore
-
 	@OneToMany(mappedBy = "employee")
 	private List<Language> languages;
 
 	@JsonIgnore
-
 	@OneToMany(mappedBy = "employee")
 	private List<Link> links;
 
 	@JsonIgnore
-
 	@OneToMany(mappedBy = "employee")
 	private List<Skill> skills;
 
