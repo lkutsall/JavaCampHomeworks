@@ -9,7 +9,9 @@ import kodlamaio.hrms.entities.dtos.AddModelForJobAdvertisementDto;
 
 public interface JobAdvertisementService {
 
-	Result add(AddModelForJobAdvertisementDto addModelForJobAdvertisementDto); 
+	//Result add(AddModelForJobAdvertisementDto addModelForJobAdvertisementDto); 
+	Result add(JobAdvertisement jobAdvertisement);
+	Result activate(int id, String email);
 	DataResult<List<JobAdvertisement>> getAllByIsActive();
 	DataResult<List<JobAdvertisement>> getAllByIsActiveAndDescendingOrder();
 	DataResult<List<JobAdvertisement>> getAllByIsActiveCompanyName(String companyName);

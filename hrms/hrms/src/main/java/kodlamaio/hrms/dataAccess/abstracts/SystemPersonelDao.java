@@ -6,4 +6,5 @@ import kodlamaio.hrms.entities.concretes.SystemPersonel;
 
 public interface SystemPersonelDao extends JpaRepository<SystemPersonel, Integer>{
 
+	SystemPersonel getSystemPersonelByEmail(String email);
 }

@@ -43,7 +43,6 @@ public class CvViewModelDto {
 	private List<CoverLetter> coverLetters;
 
 	@JsonIgnore
-
 	@OneToMany(mappedBy = "employee")
 	private List<Experience> experiences;
 

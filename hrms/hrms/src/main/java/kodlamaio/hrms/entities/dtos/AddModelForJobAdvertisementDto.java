@@ -37,6 +37,14 @@ public class AddModelForJobAdvertisementDto {
 	
 	@NotBlank
 	@NotNull
+	private String jobType;
+	
+	@NotBlank
+	@NotNull
+	private String workPlace;
+	
+	@NotBlank
+	@NotNull
 	private double salaryRangeMin;
 	
 	@NotBlank

@@ -21,25 +21,36 @@ import kodlamaio.hrms.entities.dtos.AddModelForJobAdvertisementDto;
 public class JobAdvertisementsController {
 
 	private JobAdvertisementService jobAdvertisementService;
-	
+
 	@Autowired
 	public JobAdvertisementsController(JobAdvertisementService jobAdvertisementService) {
 		super();
 		this.jobAdvertisementService = jobAdvertisementService;
 	}
-	
+
+	/*
+	 * @PostMapping("/add") public Result add(@RequestBody
+	 * AddModelForJobAdvertisementDto addModelForJobAdvertisementDto) { return
+	 * this.jobAdvertisementService.add(addModelForJobAdvertisementDto); }
+	 */
+
 	@PostMapping("/add")
-	public Result add(@RequestBody AddModelForJobAdvertisementDto addModelForJobAdvertisementDto) {
-		return this.jobAdvertisementService.add(addModelForJobAdvertisementDto);
+	public Result add(@RequestBody JobAdvertisement jobAdvertisement) {
+		return this.jobAdvertisementService.add(jobAdvertisement);
 	}
-	
+
 	@GetMapping("/getAllByIsActiveAndDescendingOrder")
-	public DataResult<List<JobAdvertisement>> getAllByIsActiveAndDescendingOrder(){
+	public DataResult<List<JobAdvertisement>> getAllByIsActiveAndDescendingOrder() {
 		return this.jobAdvertisementService.getAllByIsActiveAndDescendingOrder();
 	}
-	
+
 	@GetMapping("/getAllByIsActiveCompanyName")
-	public DataResult<List<JobAdvertisement>> getAllByIsActiveCompanyName(@RequestParam String companyName){
+	public DataResult<List<JobAdvertisement>> getAllByIsActiveCompanyName(@RequestParam String companyName) {
 		return this.jobAdvertisementService.getAllByIsActiveCompanyName(companyName);
+	}
+	
+	@PostMapping("/activate")
+	public Result activate(@RequestParam int id, String email) {
+		return this.jobAdvertisementService.activate(id, email);
 	}
 }

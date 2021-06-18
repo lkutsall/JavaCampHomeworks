@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "JobAdvertisements")
+@Table(name = "job_advertisements")
 public class JobAdvertisement {
 
 	@Id
@@ -77,4 +77,12 @@ public class JobAdvertisement {
 	@ManyToOne
 	@JoinColumn(name = "city_id")
 	private City city;
+	
+	@ManyToOne()
+	@JoinColumn(name = "job_type_id")
+	private JobType jobType;
+	
+	@ManyToOne()
+	@JoinColumn(name = "work_place_id")
+	private WorkPlace workPlace;
 }
